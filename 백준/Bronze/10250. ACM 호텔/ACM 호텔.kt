@@ -14,17 +14,12 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
         var n2 = (N/H)
         
         if(n1!=0) n2+=1
-        else {
-            n1=H
-        }
-        
-        
+        else n1=H
+       
         var n3 = n2.toString()
+       
+        if (n2 < 10) n3 = "0" + n3  
         
-        
-        if (n2 < 10) {
-          n3 = "0" + n3  
-        } 
         println(n1.toString()+n3)
     }
 }
