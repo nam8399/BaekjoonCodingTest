@@ -13,8 +13,8 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
     else {
         var max = 0
 
-        for (i in 0 until n) {
-            for (j in i+1 until n) {
+        for (i in 0 until n-2) {
+            for (j in i+1 until n-1) {
                 for (k in j+1 until n) {
                     val sum = numList[i].toInt() + numList[j].toInt() + numList[k].toInt()
 
