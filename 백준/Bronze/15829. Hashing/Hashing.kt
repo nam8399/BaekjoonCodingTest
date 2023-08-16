@@ -9,7 +9,7 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
     var cnt = 0
     
     str.forEach {
-        result += (it.toInt()-96) * calculate(cnt)
+        result += (it.toInt()-96) * calculate(cnt) % 1234567891
         cnt ++
     }
     
@@ -21,7 +21,7 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
 fun calculate(n : Int) : Int {
     var result = 1
     repeat(n) {
-    	result *= 31    
+    	result *= 31 % 1234567891    
     }
     
     return result
