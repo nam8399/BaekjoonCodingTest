@@ -1,31 +1,27 @@
-import java.util.*
 import java.io.*
+import java.util.*
 
 fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
-    val str = StringTokenizer(readLine())
+    val (n,m) = readLine().split(" ").map {it.toInt()}
     
-    val row = str.nextToken().toInt()
-    val col = str.nextToken().toInt()
+    var arr = Array(n) {IntArray(m)}
+    var min = n*m
     
-    var min = row*col
-    
-    var arr = Array(row) {IntArray(col)}
-    
-    for (i in 0 until row) {
-        val line = readLine().toCharArray()
-        
-        for (j in 0 until col) {    
-            if ((i+j)%2 == 0 && line[j] != 'W' ||
-               (i+j)%2 != 0 && line[j] != 'B') {
-                arr[i][j]++
+    for (i in 0 until n) {
+        val str = readLine()
+        var cnt = 0
+        str.forEach {
+            if ((i+cnt)%2 == 0 && it != 'W' || (i+cnt)%2 == 1 && it != 'B') {
+                arr[i][cnt] = 1
             }
             
-            if(j>0) arr[i][j] += arr[i][j-1]
+            if (cnt > 0) arr[i][cnt] += arr[i][cnt-1]
+            cnt++
         }
     }
     
-    for (i in 0..row-8) {
-        for (j in 0 .. col-8) {
+    for (i in 0 .. n-8) {
+        for (j in 0 .. m-8) {
             var count = 0
             
             for (k in i until i+8) {
@@ -33,11 +29,12 @@ fun main() = with(BufferedReader(InputStreamReader(System.`in`))) {
                 
                 if (j > 0) count -= arr[k][j-1]
             }
-            if (count > 64 - count) count = 64 - count
             
-            if(min > count) min = count
+            if (count > 64 - count) count = 64 - count
+            if (count < min) min = count
         }
     }
-        
+    
     print(min)
+    
 }
